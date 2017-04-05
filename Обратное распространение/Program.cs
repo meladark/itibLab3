@@ -8,7 +8,7 @@ namespace Обратное_распространение
     class Program
     {
        
-        static void BackPropagation(double[] X1, double[] X2, double[] net1, double[] net2, double[] Out1, double[] Out2, double[] Sigma1, double[] Sigma2, double[,] W1, double[,] W2)
+        static void BackPropagation(double[] X1, double[] net1, double[] net2, double[] Out1, double[] Out2, double[] Sigma1, double[] Sigma2, double[,] W1, double[,] W2)
         {
           //  try
             {
@@ -29,21 +29,26 @@ namespace Обратное_распространение
                 double err = SettingWeights.err(t, Out2, M);
                 if (err > 0)
                 {
-                    foreach(var i in Out2)
+                    Console.Write("Веса W: ");
+                    for(int i = 1;i<Out2.Count();i++)
                     {
-                        Console.Write(i+" ");
+                        Console.Write(Math.Round(Out2[i],2)+" ");
                     }
                     Console.WriteLine();
-                    Console.WriteLine(err);
-                    BackPropagation(X1, X2, net1, net2, Out1, Out2, Sigma1, Sigma2, W1, W2);
+                    Console.Write("Средняя ошибка: ");
+                    Console.WriteLine(Math.Round(err, 2));
+                    BackPropagation(X1, net1, net2, Out1, Out2, Sigma1, Sigma2, W1, W2);
                 }
                 else
                 {
-                    foreach (var i in Out2)
+                    Console.Write("Веса W: ");
+                    for (int i = 1; i < Out2.Count(); i++)
                     {
-                        Console.Write(i + " ");
+                        Console.Write(Math.Round(Out2[i], 2) + " ");
                     }
-                    Console.WriteLine(err);
+                    Console.WriteLine();
+                    Console.WriteLine("Средняя ошибка: ");
+                    Console.Write(Math.Round(err,2));
                     Console.ReadKey();
                 }
             }
@@ -59,7 +64,6 @@ namespace Обратное_распространение
             double[] X1 = new double[N+1];
             X1[0] = 1;
             X1[1] = -1;
-            double[] X2 = new double[J+1];
             double[] net1 = new double[J+1];
             double[] net2 = new double[M+1];
             double[] Out1 = new double[J+1];
@@ -72,7 +76,7 @@ namespace Обратное_распространение
             {
                 W1[i, 0] = i+1;
             }
-            BackPropagation(X1, X2, net1, net2, Out1, Out2,Sigma1, Sigma2, W1, W2);
+            BackPropagation(X1, net1, net2, Out1, Out2,Sigma1, Sigma2, W1, W2);
            
         }
     }
