@@ -15,9 +15,9 @@ namespace Обратное_распространение
 
                 int N = 1, J = 1, M = 3;
                 double[] t = new double[3];
-                t[0] = 2;
-                t[1] = -3;
-                t[2] = 1;
+                t[0] = 0.2;
+                t[1] = -0.3;
+                t[2] = 0.1;
                 net1 = FirstStep.net(W1,X1,N,J);            
                 Out1 = FirstStep.Out(Out1 ,net1,J);
                 net2 = FirstStep.net(W2, Out1, J, M);
@@ -39,6 +39,10 @@ namespace Обратное_распространение
                 }
                 else
                 {
+                    foreach (var i in Out2)
+                    {
+                        Console.Write(i + " ");
+                    }
                     Console.WriteLine(err);
                     Console.ReadKey();
                 }

@@ -28,7 +28,7 @@ namespace Обратное_распространение
            // double[] Out = new double[J+1];
             for (int j = 1; j <= J; j++)
             {
-                Out[j] = fnet(net[j-1]);
+                Out[j] = Math.Round(fnet(net[j-1]),2);
             }
             return Out;
         } 
