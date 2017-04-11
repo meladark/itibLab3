@@ -7,7 +7,7 @@ namespace Обратное_распространение
 {
     class Program
     {
-       
+        static int count = 0;
         static void BackPropagation(double[] X1, double[] net1, double[] net2, double[] Out1, double[] Out2, double[] Sigma1, double[] Sigma2, double[,] W1, double[,] W2)
         {
           //  try
@@ -29,26 +29,70 @@ namespace Обратное_распространение
                 double err = SettingWeights.err(t, Out2, M);
                 if (err > 0)
                 {
-                    Console.Write("Веса W: ");
-                    for(int i = 1;i<Out2.Count();i++)
+                    count++;
+                    Console.Write(count+") ");
+                    Console.Write("Предсказанные значения: ");
+                    for (int i = 1;i<Out2.Count();i++)
                     {
-                        Console.Write(Math.Round(Out2[i],2)+" ");
+                        Console.Write(Math.Round(Out2[i],3)+" ");
                     }
                     Console.WriteLine();
+                    Console.WriteLine("W1");
+                    for(int i = 0; i<N + 1; i++)
+                    {
+                        for(int j = 0; j < J; j++)
+                        {
+                            Console.Write(Math.Round(W1[i,j],2)+" ");
+                        }
+                        Console.WriteLine();
+                    }
+                    
+                    Console.WriteLine("W2");
+                    for (int i = 0; i < J + 1; i++)
+                    {
+                        for (int j = 0; j < M; j++)
+                        {
+                            Console.Write(Math.Round(W2[i, j], 2)+" ");
+                        }
+                        Console.WriteLine();
+                    }
                     Console.Write("Средняя ошибка: ");
-                    Console.WriteLine(Math.Round(err, 2));
+                    Console.WriteLine(Math.Round(err, 3));
+                 
                     BackPropagation(X1, net1, net2, Out1, Out2, Sigma1, Sigma2, W1, W2);
+
                 }
                 else
                 {
-                    Console.Write("Веса W: ");
+                    count++;
+                    Console.Write(count + ") ");
+                    Console.Write("Предсказанные значения: ");
                     for (int i = 1; i < Out2.Count(); i++)
                     {
-                        Console.Write(Math.Round(Out2[i], 2) + " ");
+                        Console.Write(Math.Round(Out2[i], 3) + " ");
                     }
                     Console.WriteLine();
-                    Console.WriteLine("Средняя ошибка: ");
-                    Console.Write(Math.Round(err,2));
+                    Console.WriteLine("W1");
+                    for (int i = 0; i < N + 1; i++)
+                    {
+                        for (int j = 0; j < J; j++)
+                        {
+                            Console.Write(Math.Round(W1[i, j], 2));
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine("W2");
+                    for (int i = 0; i < J + 1; i++)
+                    {
+                        for (int j = 0; j < M; j++)
+                        {
+                            Console.Write(Math.Round(W2[i, j], 2) + " ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Write("Средняя ошибка: ");
+                    Console.Write(Math.Round(err,3));
+                    Console.WriteLine();
                     Console.ReadKey();
                 }
             }
